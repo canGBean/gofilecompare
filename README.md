@@ -1,13 +1,13 @@
 # 说明
 本工具主要实现2个功能:
-1. 根据指定路径,遍历改路径下的所有文件（包含子文件夹下的文件）,最终生成json格式的多行日志文件。在生成的日志文件中,并不会输出文件夹及子文件夹的内容。输出格式为自定义的文件hash值与文件路径,并以换行符\n结束。日志输出格式如下:
+1. 根据指定路径,遍历改路径下的所有文件（包含子文件夹下的文件）,最终生成json格式的多行日志文件.在生成的日志文件中,并不会输出文件夹及子文件夹的内容.输出格式为自定义的文件hash值与文件路径,并以换行符\n结束.日志输出格式如下:
 ```log
 ...
 {"hashKey":"cb15034aae795b651b8654d81bb97e53","filePath":"D:\\aaa\\ccc\\ddd.txt"}
 {"hashKey":"fd65c5509a1a4074d61ea8ae3bc9c301","filePath":"D:\\aaa\\ccc\\dd11.txt"}
 ...
 ```
-2. 比较2个功能1中生成的日志文件,并生成这2个日志中的全差集数据文件。
+2. 比较2个功能1中生成的日志文件,并生成这2个日志中的全差集数据文件.
 
 # 数据格式
 1.  使用遍历功能（功能1）,在遍历文件夹路径后,生成的文件名称格式为"fileinfo-yyyy-MM-DD-HH-mm-ss.log"
@@ -47,7 +47,7 @@ type FileInfo struct {
 
 # 使用方法及命令说明
 ## 初始命令参数
-在使用时,首先需要指定初始命令参数,可选参数为init与compare。其中init是指使用功能1,compare是指使用功能2,在win10-64bit环境下,执行如下:
+在使用时,首先需要指定初始命令参数,可选参数为init与compare.其中init是指使用功能1,compare是指使用功能2,在win10-64bit环境下,执行如下:
 ```dos
 >fct.exe -h
 Usage:
@@ -78,9 +78,9 @@ Help Options:
       /r, /hashRule:         filePath+fileName+fileSize+LastModificationTime
                              more infomation read README.md (default: 1110)
 ```
-* /num参数 :短命令为/n或-n 。用来指定生成输出文件时使用的协程数量。默认为1。可选参数。
-* /p参数:短命令为/p或-p 。用来指定需要遍历的文件夹。必选参数。
-* /r参数: 短命令为/p或-p。用来指定输出文件中,hashKey属性的组成规则。这里的hashkey组成规则包含“文件路径+文件名称+文件大小+最后修改时间”每个属性如果使用则为1,如果不使用则为零。目前工具中支持3中hashkey的生成规则。说明如下:
+* /num参数 :短命令为/n或-n .用来指定生成输出文件时使用的协程数量.默认为1.可选参数.
+* /p参数:短命令为/p或-p .用来指定需要遍历的文件夹.必选参数.
+* /r参数: 短命令为/p或-p.用来指定输出文件中,hashKey属性的组成规则.这里的hashkey组成规则包含“文件路径+文件名称+文件大小+最后修改时间”每个属性如果使用则为1,如果不使用则为零.目前工具中支持3中hashkey的生成规则.说明如下:
 > 1. 如果以“文件名称+文件路径+大小”做为该文件的hashkey,则 -r的值为1110,也是工具中默认的hashkey生成模式
 >2. 如果以“文件名称+文件路径”做为该文件的hashkey,则-r的值为1100
 >3. 如果以“文件名称+文件路径+大小+最后修改时间”做为该文件的hashkey,则-r的值为1111
@@ -90,7 +90,7 @@ Help Options:
 ```
 
 ##  compare命令说明
-compare命令为比较init命令生成的日志文件,这里支持2个文件的比较,并根据hashkey筛选出2个日志中的差集文件。这里比较时需要2个日志文件的hashkey生成方式相同,否则没有比较意义。compare命令参数如下:
+compare命令为比较init命令生成的日志文件,这里支持2个文件的比较,并根据hashkey筛选出2个日志中的差集文件.这里比较时需要2个日志文件的hashkey生成方式相同,否则没有比较意义.compare命令参数如下:
 ```dos
 >fct.exe compare -h
 Usage:
@@ -105,11 +105,13 @@ Help Options:
       /y, /prefix1:   replace fileinfo path  prefix in the first filelog
       /s, /filelog2:  required,the second fileinfo log file path
       /z, /prefix2:   replace fileinfo path  prefix in the seconde filelog
+      /n, /num:       set groutine num (default: 1)
 ```
-* /filelog1参数 :短命令为/f或-f 。用来指定第1个输入的日志路径,必选
-* /prefix1参数 :短命令为/y或-y 。用来指定替换第1个日志中的FilePath 的路径前缀,并将值赋予FilePathWithOutPrefix 属性
-* /filelog2参数 :短命令为/s或-s 。用来指定第2个输入的日志路径,必选
-* /prefix2参数 :短命令为/z或-z。用来指定替换第2个日志中的FilePath 的路径前缀,并将值赋予FilePathWithOutPrefix 属性
+* /filelog1参数 :短命令为/f或-f .用来指定第1个输入的日志路径,必选
+* /prefix1参数 :短命令为/y或-y .用来指定替换第1个日志中的FilePath 的路径前缀,并将值赋予FilePathWithOutPrefix 属性
+* /filelog2参数 :短命令为/s或-s .用来指定第2个输入的日志路径,必选
+* /prefix2参数 :短命令为/z或-z.用来指定替换第2个日志中的FilePath 的路径前缀,并将值赋予FilePathWithOutPrefix 属性
+* /num参数 :短命令为/n或-n .用来设置写入文件时的协程数
 
 ### 举例说明:
 1. 在init阶段生成了2个日志结果文件分别为fileinfo-log1.log与fileinfo-log2.log内容如下:
